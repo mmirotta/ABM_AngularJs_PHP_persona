@@ -3,17 +3,17 @@ var app = angular.module('ABMangularPHP', []);
 
 
 app.controller('controlMenu', function($scope, $http) {
-  $scope.DatoTest="**Menu**";
+  $scope.ControlMenu="**Mirotta Matias**";
 });
 
 
 app.controller('controlAlta', function($scope, $http) {
-  $scope.DatoTest="**alta**";
+  $scope.ControlAlta="**alta**";
 
-//inicio las variables
+//genero un objeto persona que despues puedo acceder desde html
   $scope.persona={};
   $scope.persona.nombre= "natalia" ;
- $scope.persona.dni= "12312312" ;
+  $scope.persona.dni= "12312312" ;
   $scope.persona.apellido= "natalia" ;
   $scope.persona.foto="sinfoto";
 

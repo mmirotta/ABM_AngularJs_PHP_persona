@@ -13,9 +13,11 @@
 	<link rel="stylesheet" type="text/css" href="css/estilo.css">
 	<link rel="stylesheet" type="text/css" href="css/animacion.css">
 
-
+<!-- 1) es necesario para que funcione angular la referencia a este archivo-->
 	<script SRC="bower_components/angular/angular.min.js" TYPE="text/javascript"></script>
+<!-- 2) es necesario para que funcione tener la referencia al archivo con la aplicacion, los controllers, etc.-->
  	<script SRC="js/app.js" TYPE="text/javascript"></script>
+
 </head>
 <body ng-app="ABMangularPHP" ng-controller="controlAlta">
 	<!--?php		
@@ -41,13 +43,13 @@
 		         		<span class="glyphicon glyphicon-th" >&nbsp;</span>
 		         			Grilla</a>
 		         		</li>
-		        	<span id="tituloBarra"  class="animated bounceInRight">{{DatoTest}}ABM - PHP - Angular Versión 1.0.1 &nbsp;&nbsp;&nbsp;</span>
+		        	<span id="tituloBarra"  class="animated bounceInRight">{{ControlAlta}}ABM - PHP - Angular Versión 1.0.1 &nbsp;&nbsp;&nbsp;</span>
       </ul>
 		
 
 	<div class="container">
 		<div class="page-header">
-			<center> <h1>Datos {{DatoTest}}</h1>   </center>     
+			<center> <h1>Datos {{ControlAlta}}</h1>   </center>     
 		</div>
 		<div class="CajaInicio animated bounceInRight">
 			<h1> <!--?php echo $titulo; ?-->titulo </h1>
@@ -70,7 +72,7 @@
 				<p style="  color: black;">*La foto se actualiza al guardar.</p>
 				-->
 
-				<a class="btn btn-info " name="guardar" ng-click="Guardar()" ><span class="glyphicon glyphicon-save">&nbsp;</span>Guardar</a>
+				<a class="btn btn-primary " name="guardar" ng-click="Guardar()" ><span class="glyphicon glyphicon-save">&nbsp;</span>Guardar</a>
 					
 				<input type="hidden" value="" id="idParaModificar" name="agregar" />
 				<input type="hidden" value="" id="hdnAgregar" name="agregar" />
