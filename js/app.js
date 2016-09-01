@@ -44,6 +44,17 @@ app.controller('controlAlta', function($scope, $http) {
 app.controller('controlGrilla', function($scope, $http) {
   	$scope.DatoTest="**grilla**";
  	
+    $http.get('http://www.mocky.io/v2/57c8b15c1200007214e76aa9').then(function bien(respuesta){
+
+      console.info("volvio", respuesta.data);
+      $scope.ListadoPersonas = respuesta.data;
+
+    }, function mal(error){
+
+      console.info("error", error.data);
+      $scope.ListadoPersonas = [];
+
+    })
  /*	$http.get('PHP/nexo.php', { params: {accion :"traer"}})
  	.then(function(respuesta) {     	
 
