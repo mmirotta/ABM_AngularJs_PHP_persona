@@ -1,9 +1,23 @@
-input[type="text"]{
+input[type="text"], input[type="password"], input[type="email"]{
 
   display: block;
   color:black;
-height: 3em;
+  height: 3em;
+  width: 100%;
 }
+
+span{
+  color:black;
+}
+
+/*Estilos para error
+
+*/
+input.ng-invalid {
+    background-color: red;
+}
+
+
 .nav-tabs {
     border-bottom: 1px solid #151313 !important;
         background-color: rgba(0, 0, 0, 0.33);
