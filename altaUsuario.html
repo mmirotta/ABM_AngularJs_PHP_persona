@@ -1,0 +1,37 @@
+<html>
+<head>
+  <title>Sala Juegos</title>
+  <!--Lógica-Programación-->
+  <script SRC="bower_components/angular/angular.min.js" TYPE="text/javascript"></script>
+  <script type="text/javascript" src="js/app.js"></script>
+    <!--Estilos-->
+  <link rel="stylesheet" type="text/css" href="css/estiloAltaUsuario.css">
+</head>
+<body ng-app='salaJuegos' ng-controller='controlAlta'>
+  <form name='formAlta' id='formAlta' class='alta-form'>
+    <h2 class='alta-titulo'>Crea una cuenta</h2>
+    <div class='alta-contenedor'>
+      <input type="text" name="nombre" placeholder='Nombre' class='input-48' ng-model='usuario.nombre' required>
+      <input type="text" name="apellido" placeholder='Apellido' class='input-48' ng-model='usaurio.apellido' required>
+      <input type="number" name="edad" placeholder='Edad' class='input-25' ng-model='usuario.edad' required>
+      <input type="number" name="dni" placeholder='Documento' class='input-25' ng-model='usuario.documento' required>
+      <input type="radio" name="sexo" ng-model='usuario.sexo' value="M" checked><span style='margin-top:15px'>Masculino</span>
+      <input type="radio" name="sexo" ng-model='usuario.sexo' value="F"><span style='margin-top:15px'>Femenino</span>
+      <input type="email" name="correo" placeholder='Email' ng-model='usuario.correo' class='input-48' required>
+      <select name="Estado" class='input-48' ng-model='usuario.estado'>
+        <option>Activo</option>
+        <option>Inactivo</option>
+      </select>
+      <input type="password" name="clave" class='input-48' ng-model='usuario.clave' placeholder='Clave' required>
+      <input type="password" name="copiaClave" class='input-48' ng-model='usuario.copiaClave' placeholder="Repita clave" required>
+      <div class='div-100'>
+        <input type="checkbox" name="programacion" value="C"><span style='margin-right: 20px;'>C</span>
+        <input type="checkbox" name="programacion" value="C#"><span style='margin-right: 20px;'>C#</span>
+        <input type="checkbox" name="programacion" value="Visual Basic"><span style='margin-right: 20px;'>Visual Basic</span>
+        <input type="checkbox" name="programacion" value="PHP"><span style='margin-right: 20px;'>PHP</span>
+      </div>
+      <input type="submit" value="Guardar" class='btn-guardar' ng-disabled="formAlta.$invalid && (usuario.clave == usuario.copiaClave)">
+    </div>
+  </form>
+</body>
+</html>
