@@ -17,7 +17,7 @@ miApp.config(function($stateProvider, $urlRouterProvider){
 			"persona",
 			{
 				url:"/persona",
-				abstract:true, //
+				abstract:true, 
 				templateUrl:"abstractaPersona.html"
 			}
 		)
@@ -61,15 +61,17 @@ miApp.config(function($stateProvider, $urlRouterProvider){
 			}
 		)
 
-	$urlRouterProvider.otherwise("/persona/grilla");
+	$urlRouterProvider.otherwise("/inicio");
 });
 
 miApp.controller("controlInicio", function($scope) {
 
 });
 
-miApp.controller("controlPersonaMenu", function($scope) {
-
+miApp.controller("controlPersonaMenu", function($scope, $state) {
+	$scope.irAAlta = function(){
+		$state.go("persona.alta");
+	};
 });
 
 miApp.controller("controlPersonaAlta", function($scope) {
