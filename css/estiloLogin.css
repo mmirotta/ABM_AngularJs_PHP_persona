@@ -1,17 +1,14 @@
-* {
+.divLogin {
 	margin: 0;
 	padding: 0;
 	font-family: sans-serif;
 	box-sizing: border-box;
-}
-
-body{
 	background: #DEDEDE;
 	display: flex;
 	min-height: 100vh;
 }
 
-form {
+.formLogin {
 	margin: auto;
 	width: 50%;
 	max-width: 500px;
@@ -20,13 +17,13 @@ form {
 	border: 1px solid rgba(0,0,0.2);
 }
 
-h2{
+h1{
 	text-align: center;
-	margin-bottom: 20px;
+	margin-bottom: 20px;	
 	color: rgba(0,0,0,0.5);
 }
 
-input {
+.inputLogin {
 	display: block;
 	padding: 10px;
 	width: 100%;
@@ -34,7 +31,7 @@ input {
 	font-size: 20px;
 }
 
-input[type="submit"]{
+.botonLogin{
 	background: linear-gradient(#204862, #3481B5);
 	border: 0;
 	color: #fff;
@@ -42,24 +39,58 @@ input[type="submit"]{
 	cursor: pointer;
 	border-radius: 10px;
 	margin-bottom: 0;
+	display: block;
+	padding: 10px;
+	width: 100%;
+	margin: 30px 0;
+	font-size: 20px;
 }
 
-input[type="submit"]:hover {
+.botonLogin:hover {
 	opacity: 1;
 }
 
-input[type="submit"]:active {
+.botonLogin:active {
 	transform: scale(0.95);
 }
 
+.alta-form {
+	margin: auto;
+	width: 60%;
+	background: #F3F3F3;
+	margin-top: auto;
+	border: 1px solid rgba(0,0,0.2);
+	border-radius: 7px;
+}
+
+.alta-titulo{
+	background: rgba(0,0,0,0.5);
+	padding: 15px;
+	text-align: center;
+	font-weight: 100;
+	font-size: 30px;
+	border-top-left-radius: 7px;
+	border-top-right-radius: 7px;
+	border-bottom: 5px solid #fff;
+	color:#fff;
+}
+
+.alta-contenedor{
+	padding: 10px 30px;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content:space-between;
+}
+
+
 @media(max-width: 768px){
-	form {
+	.formLogin {
 		width: 65%;
 
 	}
 }
 @media(max-width: 480px){
-	form {
+	.formLogin {
 		width: 95%;
 	}
 }

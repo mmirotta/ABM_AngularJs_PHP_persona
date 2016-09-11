@@ -1,59 +1,14 @@
-//estilos para las validaciones
-
-input.ng-invalid {
-    background-color:red;
-}
-input.ng-valid {
-    background-color:yellow;
-}
-
-
-
-
-/*
-
-
-
-CSS Classes
-AngularJS adds CSS classes to forms and input fields depending on their states.
-
-The following classes are added to, or removed from, input fields:
-
-ng-untouched The field has not been touched yet
-ng-touched The field has been touched
-ng-pristine The field has not been  modified yet
-ng-dirty The field has been modified
-ng-valid The field content is valid
-ng-invalid The field content is not valid
-ng-valid-key One key for each validation. Example: ng-valid-required, useful when there are more than one thing that must be validated
-ng-invalid-key Example: ng-invalid-required
-The following classes are added to, or removed from, forms:
-
-ng-pristine No fields has not been modified yet
-ng-dirty One or more fields has been modified
-ng-valid The form content is valid
-ng-invalid The form content is not valid
-ng-valid-key One key for each validation. Example: ng-valid-required, useful when there are more than one thing that must be validated
-ng-invalid-key Example: ng-invalid-required
-The classes are removed if the value they represent is false.
-
-
-*/
-
 input[type="text"],input[type="email"]  {
-
-
-
   display: block;
   color:black;
-height: 3em;
-width: 100%;
+  height: 3em;
+  width: 100%;
 }
 
 label{
-
  color: black;
 }
+
 .nav-tabs {
     border-bottom: 1px solid #151313 !important;
         background-color: rgba(0, 0, 0, 0.33);
@@ -64,31 +19,30 @@ li.btn {
 
 }
 
-* {
-  margin:0;
-  padding:0;
-  border-radius: 10px;
-}
-
 .table-hover>tbody>tr:hover {
       background-color: #8387F1;
        border-radius: 0px ;
 }
+
 .table-hover>tbody>tr>td {
      
        border-radius: 0px ;
 }
- .btn{
+
+.btn{
       box-shadow: 1px 2px 5px #000000;   
-  }
+}
+
 #tituloBarra{
 
   float: right;
 }
+
 .fotoGrilla {
   width: 40px;
   height: 40px;
 }
+
 .fotoform {
   max-width: 200px;
   max-height: 200px;
@@ -97,6 +51,7 @@ li.btn {
 .container {
    margin-top: 12px;
 }
+
 #header {
     position: fixed;
     top: 0;
@@ -106,13 +61,6 @@ li.btn {
     color: #FFFFFF;
     padding: 10px;
     z-index: 1;
-}
-
-body {
-  margin: 0 auto;
-  color:#f0f0f0;
-  background:#3f51b5;
-  font-family:'Open Sans',sans-serif;
 }
 
 caption {
@@ -144,18 +92,18 @@ caption {
 .CajaEnunciado {
   max-width: 30%;
   border: dashed;
- position: fixed;
-background: royalblue;
-top: 0px;
-width: 400px;
-margin: 0;
-padding: 10px;
+  position: fixed;
+  background: royalblue;
+  top: 0px;
+  width: 400px;
+  margin: 0;
+  padding: 10px;
 
-margin-bottom: 2%;
-transition: opacity 1s;
--webkit-transition: opacity 1s;
-border-radius: 15px;
--webkit-border-radius: 15px;
+  margin-bottom: 2%;
+  transition: opacity 1s;
+  -webkit-transition: opacity 1s;
+  border-radius: 15px;
+  -webkit-border-radius: 15px;
 }
 
 .CajaInicio h1{
@@ -167,10 +115,10 @@ border-radius: 15px;
   color:#fff;
 }
 .CajaAbajo {
-   margin-top: 100px;
+  margin-top: 100px;
   width:400px;
   top:0px;
-left:0px;
+  left:0px;
   transition:opacity 1s;
   -webkit-transition:opacity 1s;
 }
@@ -200,6 +148,7 @@ input[type="text"],input[type="file"],,input[type="file"]{
   font-weight: 800;
   color:#555;
 }
+
 select{
   width:100%;
   background:#fff;
@@ -275,15 +224,15 @@ select{
 }
 
 .MiBotonUTNMenu:hover{
- background: #1e5799; /* Old browsers */
-background: -moz-linear-gradient(45deg, #1e5799 0%, #2989d8 16%, #2989d8 16%, #ffffff 36%, #ffffff 43%, #ebf709 48%, #ffffff 52%, #ffffff 61%, #207cca 82%, #207cca 99%, #207cca 99%, #7db9e8 100%); /* FF3.6+ */
-background: -webkit-gradient(linear, left bottom, right top, color-stop(0%,#1e5799), color-stop(16%,#2989d8), color-stop(16%,#2989d8), color-stop(36%,#ffffff), color-stop(43%,#ffffff), color-stop(48%,#ebf709), color-stop(52%,#ffffff), color-stop(61%,#ffffff), color-stop(82%,#207cca), color-stop(99%,#207cca), color-stop(99%,#207cca), color-stop(100%,#7db9e8)); /* Chrome,Safari4+ */
-background: -webkit-linear-gradient(45deg, #1e5799 0%,#2989d8 16%,#2989d8 16%,#ffffff 36%,#ffffff 43%,#ebf709 48%,#ffffff 52%,#ffffff 61%,#207cca 82%,#207cca 99%,#207cca 99%,#7db9e8 100%); /* Chrome10+,Safari5.1+ */
-background: -o-linear-gradient(45deg, #1e5799 0%,#2989d8 16%,#2989d8 16%,#ffffff 36%,#ffffff 43%,#ebf709 48%,#ffffff 52%,#ffffff 61%,#207cca 82%,#207cca 99%,#207cca 99%,#7db9e8 100%); /* Opera 11.10+ */
-background: -ms-linear-gradient(45deg, #1e5799 0%,#2989d8 16%,#2989d8 16%,#ffffff 36%,#ffffff 43%,#ebf709 48%,#ffffff 52%,#ffffff 61%,#207cca 82%,#207cca 99%,#207cca 99%,#7db9e8 100%); /* IE10+ */
-background: linear-gradient(45deg, #1e5799 0%,#2989d8 16%,#2989d8 16%,#ffffff 36%,#ffffff 43%,#ebf709 48%,#ffffff 52%,#ffffff 61%,#207cca 82%,#207cca 99%,#207cca 99%,#7db9e8 100%); /* W3C */
-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1e5799', endColorstr='#7db9e8',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
-color:black;
+  background: #1e5799; /* Old browsers */
+  background: -moz-linear-gradient(45deg, #1e5799 0%, #2989d8 16%, #2989d8 16%, #ffffff 36%, #ffffff 43%, #ebf709 48%, #ffffff 52%, #ffffff 61%, #207cca 82%, #207cca 99%, #207cca 99%, #7db9e8 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left bottom, right top, color-stop(0%,#1e5799), color-stop(16%,#2989d8), color-stop(16%,#2989d8), color-stop(36%,#ffffff), color-stop(43%,#ffffff), color-stop(48%,#ebf709), color-stop(52%,#ffffff), color-stop(61%,#ffffff), color-stop(82%,#207cca), color-stop(99%,#207cca), color-stop(99%,#207cca), color-stop(100%,#7db9e8)); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(45deg, #1e5799 0%,#2989d8 16%,#2989d8 16%,#ffffff 36%,#ffffff 43%,#ebf709 48%,#ffffff 52%,#ffffff 61%,#207cca 82%,#207cca 99%,#207cca 99%,#7db9e8 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(45deg, #1e5799 0%,#2989d8 16%,#2989d8 16%,#ffffff 36%,#ffffff 43%,#ebf709 48%,#ffffff 52%,#ffffff 61%,#207cca 82%,#207cca 99%,#207cca 99%,#7db9e8 100%); /* Opera 11.10+ */
+  background: -ms-linear-gradient(45deg, #1e5799 0%,#2989d8 16%,#2989d8 16%,#ffffff 36%,#ffffff 43%,#ebf709 48%,#ffffff 52%,#ffffff 61%,#207cca 82%,#207cca 99%,#207cca 99%,#7db9e8 100%); /* IE10+ */
+  background: linear-gradient(45deg, #1e5799 0%,#2989d8 16%,#2989d8 16%,#ffffff 36%,#ffffff 43%,#ebf709 48%,#ffffff 52%,#ffffff 61%,#207cca 82%,#207cca 99%,#207cca 99%,#7db9e8 100%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1e5799', endColorstr='#7db9e8',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+  color:black;
 }
 /*
 .MiBotonUTNLinea{
@@ -332,34 +281,3 @@ position: absolute;
 .MiBotonUTNMenuInicio:hover{
   background:red;
 }
-
-
-
-/*
-.CajaUno h1{
-  background:#f50056; 
-  padding:20px 0;
-  font-size:140%;
-  font-weight:300;
-  text-align:center;
-  color:#fff;
-}
-
-.CajaUno a:hover {
-  color:#f50056;
-}
-*/
-
-/*
-.CajaUno a {
-  color:#DDDDDD;
-}
-*/
-/*
-.PiedraPapelTijera
-{
-  width: 100px;
-  height: 100px;
-  padding: 10px;
-
-}*/
