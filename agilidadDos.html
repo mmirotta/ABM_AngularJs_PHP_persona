@@ -1,21 +1,17 @@
-<body onload="comenzar()">
-<div class="CajaUno animated bounceInDown">
-	<input type="text" readonly id="PrimerNumero">
-	<input type="text" readonly id="Operador">
-	<input type="text" readonly id="SegundoNumero">
-	<form id="FormIngreso">
-		<input type="text"  id="Respuesta">
-		<center>
-			<img src="imagenes/interrogacion.jpg" >
-		</center>
-	</form>
-	<button  class="MiBotonUTN" onclick="Responder()" >Aceptar</button>
-</div>
-<div class="CajaUno animated bounceInLeft">
-</div>
-<div class="CajaEnunciado animated bounceInLeft">
+<form name='formLogin' id='formLogin' class='login-form' style="margin-top: 5%">
+    <h1 class='alta-titulo'>Agilidad Dos</h1>
+    <div class='alta-contenedor'>
+	<h2 style="width:100%; text-aling: center"> {{primerNumero}} {{operador}} {{segundoNumero}} </h2>
+	<input type="text" class="input" placeholder="Ingrese un numero..." name="Respuesta" ng-model="respuesta">
+	<center>
+		<img style="width:157px" src="img/{{imagen}}" >
+	</center>
+	<input type="submit" class="btn-juegos" value="Responder" ng-click="responder()" ></input>
+	</div>
+</form>
+<div class="divEnunciados">
 	<h2>Enunciado:</h2>
-	<h3>
+	<p>
 		Además de lo anterior, ahora se agregara un temporizador que a los 4(cuatro) segundos dará por terminado el juego y se verificará si el resultado es el correcto.
-	</h3>
+	</p>
 </div>

@@ -5,11 +5,6 @@
 	font-family: sans-serif;
 }
 
-body{
-	font-family: sans-serif;
-	background: #DEDEDE;
-}
-
 .fixed{
 	position: fixed;
 	width: 100%;
@@ -27,6 +22,7 @@ header{
 header label{
 	font-size: 30px;
 	cursor: pointer;
+	display: none;
 }
 
 #btn-menu{
@@ -42,7 +38,7 @@ header label{
 
 .menu a{
 	display: block;
-	padding: 0 2.5em;
+	padding: 10px 2.5em;
 	color: #fff;
 	text-decoration: none; 
 	transition: 0.4s;
@@ -52,31 +48,12 @@ header label{
 	background: rgba(0,0,0,0.5);
 }
 
-.menu ul ul ul{
+.menu ul ul{
 	display: none;
 }
 
 .menu li {
 	line-height: 3rem;
-}
-
-/*primer nivel*/
-
-.menu > ul {
-	background: #333;
-	display: table;
-	width: 100%;
-}
-
-.menu > ul > li {
-	float:left;
-}
-
-/*Segundo nivel*/
-
-.menu ul li:hover > ul {
-	display: block;
-	position: absolute;
 }
 
 /*responsive*/

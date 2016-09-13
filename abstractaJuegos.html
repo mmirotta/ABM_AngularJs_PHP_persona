@@ -1,47 +1,29 @@
-<ul class="nav nav-tabs">
-	<li  class="btn btn-info animated bounceInLeft" >
-	 	<a ui-sref="juegos.adivinaUno()">
-	 		 <span class="glyphicon glyphicon-list-alt">&nbsp;</span>
-	 		 Adivina Uno 
-	 	</a>
-	</li>
-	<li class="btn btn-info animated bounceInLeft" >
-	 	<a ui-sref="juegos.adivinaDos()">
-	 		<span class="glyphicon glyphicon-plus-sign">&nbsp;</span>
+<header class='fixed'>
+    <input type='checkbox' id='btn-menu'>
+    <label for='btn-menu' class='icon-menu'></label>
+    <nav class='menu'>
+    <ul>
+      <li><a ui-sref="juegos.adivinaUno()">
+      		Adivina Uno
+      	</a></li>
+      <li><a ui-sref="juegos.adivinaDos()">
 	 		Adivina Dos
-	 	</a>
-	</li>
-	<li  class="btn btn-info animated bounceInLeft" >
-	 	<a ui-sref="juegos.agilidadUno()"> 
- 		<span class="glyphicon glyphicon-th" >&nbsp;</span>
+	 	</a></li>
+      <li><a ui-sref="juegos.agilidadUno()"> 
  			Agilidad Uno
- 		</a>
-	</li>
-	<li  class="btn btn-info animated bounceInLeft" >
-	 	<a ui-sref="juegos.agilidadDos()"> 
- 		<span class="glyphicon glyphicon-th" >&nbsp;</span>
+ 		</a></li>
+ 	  <li><a ui-sref="juegos.agilidadDos()"> 
  			Agilidad Dos
- 		</a>
-	</li>
-	<li  class="btn btn-info animated bounceInLeft" >
-	 	<a ui-sref="juegos.piedraPapelTijeraUno()"> 
- 		<span class="glyphicon glyphicon-th" >&nbsp;</span>
+ 		</a></li>
+ 	  <li><a ui-sref="juegos.piedraPapelTijeraUno()"> 
  			Piedra-Papel-Tijera Uno
- 		</a>
-	</li>
-	<li  class="btn btn-info animated bounceInLeft" >
-	 	<a ui-sref="juegos.piedraPapelTijeraDos()"> 
- 		<span class="glyphicon glyphicon-th" >&nbsp;</span>
+ 		</a></li>
+ 	  <li><a ui-sref="juegos.piedraPapelTijeraDos()"> 
  			Piedra-Papel-Tijera Dos
- 		</a>
-	</li>
-	<li  class="btn btn-info animated bounceInLeft" >
-	 	<a ui-sref="juegos.reflejosUno()"> 
- 		<span class="glyphicon glyphicon-th" >&nbsp;</span>
- 			Reflejos Uno
- 		</a>
-	</li>
-</ul>
+ 		</a></li>
+    </ul>
+    </nav>
+</header>
 <div ui-view name="contenido"> 
 </div>
 

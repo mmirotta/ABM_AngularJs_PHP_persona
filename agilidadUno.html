@@ -1,20 +1,17 @@
-<body onload="comenzar()">
-<div class="CajaUno animated bounceInDown">
-	<input type="text" readonly id="PrimerNumero">
-	<input type="text" readonly id="Operador">
-	<input type="text" readonly id="SegundoNumero">
-	<form id="FormIngreso">
-		<input type="text"  id="Respuesta">
-		<center>
-			<img src="imagenes/interrogacion.jpg" >
-		</center>
-	</form>
-	<button  class="MiBotonUTN" onclick="Responder()" >Aceptar</button>
-</div>
-<div class="CajaEnunciado animated bounceInLeft">
+<form name='formLogin' id='formLogin' class='login-form' style="margin-top: 5%">
+    <h1 class='alta-titulo'>Agilidad Uno</h1>
+    <div class='alta-contenedor'>
+	<h2 style="width:100%; text-aling: center"> {{primerNumero}} {{operador}} {{segundoNumero}} </h2>
+	<input type="number" class="input" placeholder="Ingrese un numero..." name="Respuesta" ng-model="respuesta">
+	<center>
+		<img style="width:157px" src="img/{{imagen}}" >
+	</center>
+	<input type="submit" class="btn-juegos" value="Responder" ng-click="responder()" ></input>
+	</div>
+</form>
+<div class="divEnunciados">
 	<h2>Enunciado:</h2>
-	<h3>
-		Debemos mostrar dos números Random  del 1 al 10 y una de las cuatro operaciones básicas (suma, resta, división o multiplicación) para realizar entre estos dos números, estas operaciones también serán Random. En el cuadro de texto resultado el jugador debe ingresar el resultado de la operación y presionar el botón  Aceptar.
-		se debe informar si el resultado es el correcto o no.
-	</h3>
+	<p>
+		Debemos mostrar dos números Random  del 1 al 10 y una de las cuatro operaciones básicas (suma, resta, división o multiplicación) para realizar entre estos dos números, estas operaciones también serán Random. En el cuadro de texto resultado el jugador debe ingresar el resultado de la operación y presionar el botón  Aceptar. Se debe informar si el resultado es el correcto o no.
+	</p>
 </div>

@@ -1,25 +1,26 @@
-<div class="CajaUno animated bounceInDown">
-	<form id="FormIngreso">
-		<input type="text"  placeholder="Ingrese número" id="numero">
+<form name='formLogin' id='formLogin' class='login-form' style="margin-top: 5%">
+    <h1 class='alta-titulo'>Adivina el número</h1>
+    <div class='alta-contenedor'>
+		<input type="number" class="input" placeholder="Ingrese número" name="numero" ng-model="numero">
+		<input type="submit" class="btn-juegos" value="Verificar" ng-click="verificar()" 
+					ng-show="random != ''"></input>
+		<input type="submit" class="btn-juegos" value="Comenzar" ng-click="comenzar()" 
+					ng-show="random == '' "></input> 
 		<br>
-		<input type="text"  placeholder="intentos" readonly id="intentos">
-	</form>
-</div>
-<div class="CajaUno animated bounceInLeft">
-<button style="height:5em;" class="MiBotonUTN"  ng-click="verificar()" >Verificar</button>
-	<button  class="MiBotonUTN" ng-click="comenzar()" >Comenzar</button>
-</div>
-<div class="CajaEnunciado animated bounceInLeft">
+		<h1 style="color:{{colorResultado}}">{{resultado}}</h1>
+	</div>
+</form>
+<div class="divEnunciados">
 	<h2>Enunciado:</h2>
-		<h3>
-			1.	Adivina el número (v 2.0):
-			En esta oportunidad el juego evaluará tus aptitudes a partir de la cantidad de intentos, por lo cual se informará lo siguiente:
-			<br>	1° intento: “usted es un Psíquico”.
-			<br>	2° intento: “excelente percepción”.
-			<br>	3° intento: “Esto es suerte”.
-			<br>	4° intento: “Excelente técnica”.
-			<br>	5° intento: “usted está en la media”.
-			<br>	Desde  6 Intentos hasta 10:”falta técnica”
-			<br>	Más de 10 intentos: “afortunado en el amor!!”.
-		</h3>
+	<p>
+		1.	Adivina el número (v 2.0):
+		En esta oportunidad el juego evaluará tus aptitudes a partir de la cantidad de intentos, por lo cual se informará lo siguiente:
+		<br>	1° intento: “usted es un Psíquico”.
+		<br>	2° intento: “excelente percepción”.
+		<br>	3° intento: “Esto es suerte”.
+		<br>	4° intento: “Excelente técnica”.
+		<br>	5° intento: “usted está en la media”.
+		<br>	Desde  6 Intentos hasta 10:”falta técnica”
+		<br>	Más de 10 intentos: “afortunado en el amor!!”.
+	</p>
 </div>
