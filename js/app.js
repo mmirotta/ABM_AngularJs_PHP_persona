@@ -18,6 +18,8 @@ app.controller('controlAlta', function($scope, $http) {
   $scope.persona.foto="sinfoto";
 
 
+
+
   $scope.Guardar=function(){
 
 

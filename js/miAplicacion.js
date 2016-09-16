@@ -1,4 +1,4 @@
-var miApp = angular.module('angularABM', ['ui.router']);
+var miApp = angular.module('angularABM', ['ui.router', 'angularFileUpload']);
 
 miApp.config(function($stateProvider, $urlRouterProvider){
 	//aca se genera el ruteo atravez de estados
@@ -226,12 +226,178 @@ miApp.controller("controlPersonaMenu", function($scope, $state) {
 	};
 });
 
-miApp.controller("controlPersonaAlta", function($scope) {
+miApp.controller("controlPersonaAlta", function($scope, $http, $state, FileUploader) {
+  $scope.DatoTest="**alta**";
+  //inicio las variables
+  $scope.uploader=new FileUploader({url:'PHP/nexo.php'});
+  $scope.persona={};
+  $scope.persona.nombre= "natalia" ;
+  $scope.persona.dni= "12312312" ;
+  $scope.persona.apellido= "natalia" ;
+  $scope.persona.foto="pordefecto.png";
 
+  $scope.Guardar=function(){
+	console.log($scope.uploader.queue);
+	if($scope.uploader.queue[0]!=undefined)
+	{
+		var nombreFoto = $scope.uploader.queue[0]._file.name;
+		$scope.persona.foto=nombreFoto;
+	}
+	$scope.uploader.uploadAll();
+  	console.log("persona a guardar:");
+    console.log($scope.persona);
+  }
+  var uploader = $scope.uploader = new FileUploader({
+            url: 'servidor/archivos.php'
+        });
+  
+  uploader.filters.push({
+      name: 'customFilter',
+      fn: function(item /*{File|FileLikeObject}*/, options) {
+          return this.queue.length < 10;
+      }
+  });
+
+  // CALLBACKS
+
+  uploader.onWhenAddingFileFailed = function(item /*{File|FileLikeObject}*/, filter, options) {
+      console.info('onWhenAddingFileFailed', item, filter, options);
+  };
+  uploader.onAfterAddingFile = function(fileItem) {
+      console.info('onAfterAddingFile', fileItem);
+  };
+  uploader.onAfterAddingAll = function(addedFileItems) {
+      console.info('onAfterAddingAll', addedFileItems);
+  };
+  uploader.onBeforeUploadItem = function(item) {
+      console.info('onBeforeUploadItem', item);
+  };
+  uploader.onProgressItem = function(fileItem, progress) {
+      console.info('onProgressItem', fileItem, progress);
+  };
+  uploader.onProgressAll = function(progress) {
+      console.info('onProgressAll', progress);
+  };
+  uploader.onSuccessItem = function(fileItem, response, status, headers) {
+      console.info('onSuccessItem', fileItem, response, status, headers);
+  };
+  uploader.onErrorItem = function(fileItem, response, status, headers) {
+      console.info('onErrorItem', fileItem, response, status, headers);
+  };
+  uploader.onCancelItem = function(fileItem, response, status, headers) {
+      console.info('onCancelItem', fileItem, response, status, headers);
+  };
+  uploader.onCompleteItem = function(fileItem, response, status, headers) {
+      console.info('onCompleteItem', fileItem, response, status, headers);
+  };
+  uploader.onCompleteAll = function() {
+      console.info('onCompleteAll');
+  };
 });
 
-miApp.controller("controlPersonaGrilla", function($scope) {
+miApp.controller("controlPersonaGrilla", function($scope, $http, $state) {
+	$scope.DatoTest="**grilla**";
+ 	
+ 	$http.get('PHP/nexo.php', { params: {accion :"traer"}})
+ 	.then(function(respuesta) {     	
 
+      	 $scope.ListadoPersonas = respuesta.data.listado;
+      	 console.log(respuesta.data);
+
+    },function errorCallback(response) {
+     		 $scope.ListadoPersonas= [];
+     		console.log( response);
+     			/*
+
+					https://docs.angularjs.org/api/ng/service/$http
+
+     			the response object has these properties:
+
+				data – {string|Object} – The response body transformed with the transform functions.
+				status – {number} – HTTP status code of the response.
+				headers – {function([headerName])} – Header getter function.
+				config – {Object} – The configuration object that was used to generate the request.
+				statusText – {string} – HTTP status text of the response.
+						A response status code between 200 and 299 is considered a success
+						 status and will result in the success callback being called. 
+						 Note that if the response is a redirect, XMLHttpRequest will 
+						 transparently follow it, meaning that 
+						 the error callback will not be called for such responses.
+ 	 */
+ 	 });
+	/*$scope.Modificar=function(persona)
+	{
+		$state.go("modificacion", persona);
+	};*/
+
+ 	$scope.Borrar=function(persona){
+		console.log("borrar"+persona);
+
+
+
+$http.post("PHP/nexo.php",{datos:{accion :"borrar",persona:persona}},{headers: {'Content-Type': 'application/x-www-form-urlencoded'}})
+ .then(function(respuesta) {       
+         //aca se ejetuca si retorno sin errores        
+         console.log(respuesta.data);
+		 $http.get('PHP/nexo.php', { params: {accion :"traer"}})
+		.then(function(respuesta) {     	
+
+			 $scope.ListadoPersonas = respuesta.data.listado;
+			 console.log(respuesta.data);
+
+		},function errorCallback(response) {
+				 $scope.ListadoPersonas= [];
+				console.log( response);
+		 });
+
+    },function errorCallback(response) {        
+        //aca se ejecuta cuando hay errores
+        console.log( response);           
+    });
+
+/*
+     $http.post('PHP/nexo.php', 
+      headers: 'Content-Type': 'application/x-www-form-urlencoded',
+      params: {accion :"borrar",persona:persona})
+    .then(function(respuesta) {       
+         //aca se ejetuca si retorno sin errores        
+         console.log(respuesta.data);
+
+    },function errorCallback(response) {        
+        //aca se ejecuta cuando hay errores
+        console.log( response);           
+    });
+
+*/
+ 	}
+
+
+
+
+ 	/*$scope.Modificar=function(persona){
+ 		$http.post('PHP/nexo.php', { datos: {accion :"modificar",persona:$scope.persona}})
+		  .then(function(respuesta) {     	
+				 //aca se ejetuca si retorno sin errores      	
+			 console.log(respuesta.data);
+			 location.href="formGrilla.html";
+
+		},function errorCallback(response) {     		
+				//aca se ejecuta cuando hay errores
+				console.log( response);     			
+		  });
+ 		/*console.log("Modificar"+id);
+		$http.post("PHP/nexo.php", {datos:{accion:"buscar", id:id}})
+		.then(function(respuesta)
+		{
+			var persona=respuesta.data;
+			$state.go("alta");//location.href="formAlta.html";
+			$scope.DatoTest=persona.nombre;
+			console.log(persona);
+		} ,function errorCallback(response) {        
+			//aca se ejecuta cuando hay errores
+			console.log(response);           
+		});
+ 	}*/
 });
 
 miApp.controller("controlLogin", function($scope, $state) {
