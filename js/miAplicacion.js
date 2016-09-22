@@ -1,6 +1,12 @@
-var miApp = angular.module('angularABM', ['ui.router', 'angularFileUpload']);
+var miApp = angular.module('angularABM', ['ui.router', 'angularFileUpload','satellizer']);
 
-miApp.config(function($stateProvider, $urlRouterProvider){
+miApp.config(function($stateProvider, $urlRouterProvider, $authProvider){
+	//proveedor de autentificacion.
+	$authProvider.loginUrl = 'ABM_AngularJs_PHP_persona/servidor/jwt/php/auth.php';
+	$authProvider.tokenName = 'MiTokenGeneradoEnPHP';
+	$authProvider.tokenPrefix = 'Aplicacion';
+	$authProvider.authReader = 'data';
+
 	//aca se genera el ruteo atravez de estados
 
 	$stateProvider
@@ -8,7 +14,7 @@ miApp.config(function($stateProvider, $urlRouterProvider){
 			"inicio",
 			{
 				url:"/inicio",
-				templateUrl:"inicio.html",
+				templateUrl:"vistas/inicio.html",
 				controller:"controlInicio"
 			}
 		)
@@ -18,7 +24,7 @@ miApp.config(function($stateProvider, $urlRouterProvider){
 			{
 				url:"/persona",
 				abstract:true, 
-				templateUrl:"abstractaPersona.html"
+				templateUrl:"vistas/persona/abstractaPersona.html"
 			}
 		)
 
@@ -28,7 +34,7 @@ miApp.config(function($stateProvider, $urlRouterProvider){
 				url:"/menu",
 				views:{
 					"contenido": {
-					templateUrl:"personaMenu.html",
+					templateUrl:"vistas/persona/personaMenu.html",
 					controller:"controlPersonaMenu"
 					}
 				}
@@ -41,7 +47,7 @@ miApp.config(function($stateProvider, $urlRouterProvider){
 				url:"/alta",
 				views:{
 					"contenido": {
-					templateUrl:"personaAlta.html",
+					templateUrl:"vistas/persona/personaAlta.html",
 					controller:"controlPersonaAlta"
 					}
 				}
@@ -54,7 +60,7 @@ miApp.config(function($stateProvider, $urlRouterProvider){
 				url:"/grilla",
 				views:{
 					"contenido": {
-					templateUrl:"personaGrilla.html",
+					templateUrl:"vistas/persona/personaGrilla.html",
 					controller:"controlPersonaGrilla"
 					}
 				}
@@ -66,7 +72,7 @@ miApp.config(function($stateProvider, $urlRouterProvider){
 			{
 				url:"/login",
 				abstract:true, 
-				templateUrl:"abstractaLogin.html"
+				templateUrl:"vistas/login/abstractaLogin.html"
 			}
 		)
 
@@ -76,7 +82,7 @@ miApp.config(function($stateProvider, $urlRouterProvider){
 				url:"/login",
 				views:{
 					"contenido": {
-					templateUrl:"login.html",
+					templateUrl:"vistas/login/login.html",
 					controller:"controlLogin"
 					}
 				}
@@ -89,7 +95,7 @@ miApp.config(function($stateProvider, $urlRouterProvider){
 				url:"/registro",
 				views:{
 					"contenido": {
-					templateUrl:"registro.html",
+					templateUrl:"vistas/login/registro.html",
 					controller:"controlRegistro"
 					}
 				}
@@ -101,7 +107,7 @@ miApp.config(function($stateProvider, $urlRouterProvider){
 			{
 				url:"/juegos",
 				abstract:true, 
-				templateUrl:"abstractaJuegos.html"
+				templateUrl:"vistas/juego/abstractaJuegos.html"
 			}
 		)
 
@@ -111,7 +117,7 @@ miApp.config(function($stateProvider, $urlRouterProvider){
 				url:"/menu",
 				views:{
 					"contenido": {
-					templateUrl:"juegosMenu.html",
+					templateUrl:"vistas/juego/juegosMenu.html",
 					controller:"controlJuegosMenu"
 					}
 				}
@@ -124,7 +130,7 @@ miApp.config(function($stateProvider, $urlRouterProvider){
 				url:"/adivinaUno",
 				views:{
 					"contenido": {
-					templateUrl:"adivinaUno.html",
+					templateUrl:"vistas/juego/adivinaUno.html",
 					controller:"controlAdivinaUno"
 					}
 				}
@@ -137,7 +143,7 @@ miApp.config(function($stateProvider, $urlRouterProvider){
 				url:"/adivinaDos",
 				views:{
 					"contenido": {
-					templateUrl:"adivinaDos.html",
+					templateUrl:"vistas/juego/adivinaDos.html",
 					controller:"controlAdivinaDos"
 					}
 				}
@@ -150,7 +156,7 @@ miApp.config(function($stateProvider, $urlRouterProvider){
 				url:"/agilidadUno",
 				views:{
 					"contenido": {
-					templateUrl:"agilidadUno.html",
+					templateUrl:"vistas/juego/agilidadUno.html",
 					controller:"controlAgilidadUno"
 					}
 				}
@@ -163,7 +169,7 @@ miApp.config(function($stateProvider, $urlRouterProvider){
 				url:"/agilidadDos",
 				views:{
 					"contenido": {
-					templateUrl:"agilidadDos.html",
+					templateUrl:"vistas/juego/agilidadDos.html",
 					controller:"controlAgilidadDos"
 					}
 				}
@@ -176,7 +182,7 @@ miApp.config(function($stateProvider, $urlRouterProvider){
 				url:"/piedraPapelTijeraUno",
 				views:{
 					"contenido": {
-					templateUrl:"piedraPapelTijeraUno.html",
+					templateUrl:"vistas/juego/piedraPapelTijeraUno.html",
 					controller:"controlPiedraPapelTijeraUno"
 					}
 				}
@@ -189,26 +195,12 @@ miApp.config(function($stateProvider, $urlRouterProvider){
 				url:"/piedraPapelTijeraDos",
 				views:{
 					"contenido": {
-					templateUrl:"piedraPapelTijeraDos.html",
+					templateUrl:"vistas/juego/piedraPapelTijeraDos.html",
 					controller:"controlPiedraPapelTijeraDos"
 					}
 				}
 			}
 		)
-
-		.state(
-			"juegos.reflejosUno",
-			{
-				url:"/reflejosUno",
-				views:{
-					"contenido": {
-					templateUrl:"reflejosUno.html",
-					controller:"controlReflejosUno"
-					}
-				}
-			}
-		)
-
 
 	$urlRouterProvider.otherwise("/inicio");
 });
@@ -229,7 +221,7 @@ miApp.controller("controlPersonaMenu", function($scope, $state) {
 miApp.controller("controlPersonaAlta", function($scope, $http, $state, FileUploader) {
   $scope.DatoTest="**alta**";
   //inicio las variables
-  $scope.uploader=new FileUploader({url:'PHP/nexo.php'});
+  //$scope.uploader=new FileUploader({url:'PHP/nexo.php'});
   $scope.persona={};
   $scope.persona.nombre= "natalia" ;
   $scope.persona.dni= "12312312" ;
@@ -400,13 +392,23 @@ $http.post("PHP/nexo.php",{datos:{accion :"borrar",persona:persona}},{headers: {
  	}*/
 });
 
-miApp.controller("controlLogin", function($scope, $state) {
-	$scope.Registrarse = function(){
-		$state.go("login.registro");
-	};
+miApp.controller("controlLogin", function($scope, $state, $auth) {
+	$scope.usuario = {};
+	$scope.usuario.correo = "";
+	$scope.usuario.clave = "";
 
 	$scope.Verificar = function(){
-		controle.log("verifica el login");
+		//esto es una llamada igual que el http
+		$auth.login($scope.usuario)
+			.then(function(response){
+				console.info("correcto", response);
+			}).catch(function(response){
+				console.info("NO volvio bien", response);
+			});
+	};
+
+	$scope.Registrarse = function(){
+		$state.go("login.registro");
 	};
 });
 
