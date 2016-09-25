@@ -92,6 +92,7 @@ input[type="submit"]{
 
 input[type="submit"]:hover {
 	opacity: 1;
+	cursor: pointer;
 }
 
 input[type="submit"]:active {
@@ -107,4 +108,14 @@ input[type="submit"]:active {
 
 input.ng-invalid{
 	border-color:red;
+}
+
+
+/*Inicio*/
+.contenedorRegistro{
+	position: relative;
+	padding-top: 10%;
+	padding-bottom:3%;
+	float: right;
+	width: 40%;
 }

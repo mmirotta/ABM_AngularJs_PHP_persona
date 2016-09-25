@@ -205,11 +205,26 @@ miApp.config(function($stateProvider, $urlRouterProvider, $authProvider){
 	$urlRouterProvider.otherwise("/inicio");
 });
 
-miApp.controller("controlInicio", function($scope) {
+miApp.controller("controlInicio", function($scope, $auth) {
+	if ($auth.isAuthenticated())
+	{
+		console.info("token", $auth.getPayload());
+		$scope.logeado = false;
+	}	
+	else
+	{
+		console.info("no token", $auth.getPayload());	
+		$scope.logeado = true;
+	}
 
+	$scope.Registrarse = function(){
+		controle.log("guarda la cuenta");
+	};
 });
 
-miApp.controller("controlPersonaMenu", function($scope, $state) {
+miApp.controller("controlPersonaMenu", function($scope, $state, $auth) {
+	if ($auth.isAuthenticated())
+		$state.go("inicio");
 	$scope.irAAlta = function(){
 		$state.go("persona.alta");
 	};
@@ -218,14 +233,14 @@ miApp.controller("controlPersonaMenu", function($scope, $state) {
 	};
 });
 
-miApp.controller("controlPersonaAlta", function($scope, $http, $state, FileUploader) {
+miApp.controller("controlPersonaAlta", function($scope, $http, $state, FileUploader, $auth) {
   $scope.DatoTest="**alta**";
   //inicio las variables
-  //$scope.uploader=new FileUploader({url:'servidor/nexoPersona.php'});
+  var uploader = $scope.uploader=new FileUploader({url:'servidor/imagenes/nexoPersona.php'});
   $scope.persona={};
-  $scope.persona.nombre= "natalia" ;
-  $scope.persona.dni= "12312312" ;
-  $scope.persona.apellido= "natalia" ;
+  $scope.persona.nombre= "" ;
+  $scope.persona.dni= "" ;
+  $scope.persona.apellido= "" ;
   $scope.persona.foto="pordefecto.png";
 
   $scope.Guardar=function(){
@@ -239,9 +254,9 @@ miApp.controller("controlPersonaAlta", function($scope, $http, $state, FileUploa
   	console.log("persona a guardar:");
     console.log($scope.persona);
   }
-  var uploader = $scope.uploader = new FileUploader({
+  /*var uploader = $scope.uploader = new FileUploader({
             url: 'servidor/archivos.php'
-        });
+        });*/
   
   uploader.filters.push({
       name: 'customFilter',
@@ -287,7 +302,7 @@ miApp.controller("controlPersonaAlta", function($scope, $http, $state, FileUploa
   };
 });
 
-miApp.controller("controlPersonaGrilla", function($scope, $http, $state) {
+miApp.controller("controlPersonaGrilla", function($scope, $http, $state, $auth) {
 	$scope.DatoTest="**grilla**";
  	
  	$http.get('servidor/nexoPersona.php', { params: {accion :"traer"}})
@@ -373,7 +388,9 @@ miApp.controller("controlLogin", function($scope, $state, $auth) {
 				console.info("correcto", response);
 				//solo sabemos que nos devolvio un token correcto con el isauthenticated
 				if ($auth.isAuthenticated())
-					console.info("token", $auth.getPayload());
+				{
+					$state.go("inicio");
+				}
 				else
 					console.info("no token", $auth.getPayload());		
 				
@@ -382,12 +399,12 @@ miApp.controller("controlLogin", function($scope, $state, $auth) {
 			});
 	};
 
-	$scope.Registrarse = function(){
-		$state.go("login.registro");
-	};
 });
 
-miApp.controller("controlRegistro", function($scope) {
+miApp.controller("controlRegistro", function($scope, $auth) {
+	if ($auth.isAuthenticated())
+		$state.go("inicio");
+	
 	$scope.Guardar = function(){
 		controle.log("guarda la cuenta");
 	};
@@ -397,7 +414,10 @@ miApp.controller("controlJuegosMenu", function($scope) {
 
 });	
 
-miApp.controller("controlAdivinaUno", function($scope) {
+miApp.controller("controlAdivinaUno", function($scope, $state, $auth) {
+	if ($auth.isAuthenticated())
+		$state.go("inicio");
+
 	$scope.random = "";
 	$scope.intentos = "0";
 	$scope.resultado = "";
@@ -438,7 +458,10 @@ miApp.controller("controlAdivinaUno", function($scope) {
 	}
 });	
 
-miApp.controller("controlAdivinaDos", function($scope) {
+miApp.controller("controlAdivinaDos", function($scope, $auth) {
+	if ($auth.isAuthenticated())
+		$state.go("inicio");
+
 	$scope.random = "";
 	$scope.intentos = "0";
 	$scope.resultado = "";
@@ -504,8 +527,10 @@ miApp.controller("controlAdivinaDos", function($scope) {
 	}
 });
 
-miApp.controller("controlAgilidadUno", function($scope) {
-
+miApp.controller("controlAgilidadUno", function($scope, $auth) {
+	if ($auth.isAuthenticated())
+		$state.go("inicio");
+	
 	$scope.primerNumero = Math.floor((Math.random() * 10) + 1);
 	$scope.segundoNumero = Math.floor((Math.random() * 10) + 1);
 	$scope.imagen = "signo.png";
@@ -560,7 +585,10 @@ miApp.controller("controlAgilidadUno", function($scope) {
 	};
 });	
 
-miApp.controller("controlAgilidadDos", function($scope) {
+miApp.controller("controlAgilidadDos", function($scope, $auth) {
+	if ($auth.isAuthenticated())
+		$state.go("inicio");
+	
 	$scope.primerNumero = Math.floor((Math.random() * 10) + 1);
 	$scope.segundoNumero = Math.floor((Math.random() * 10) + 1);
 	$scope.imagen = "signo.png";
@@ -625,7 +653,10 @@ miApp.controller("controlAgilidadDos", function($scope) {
     }
 });
 
-miApp.controller("controlPiedraPapelTijeraUno", function($scope) {
+miApp.controller("controlPiedraPapelTijeraUno", function($scope, $auth) {
+	if ($auth.isAuthenticated())
+		$state.go("inicio");
+	
 	comenzar();
 
 	$scope.piedra = function(){
@@ -692,7 +723,10 @@ miApp.controller("controlPiedraPapelTijeraUno", function($scope) {
 	}
 });
 
-miApp.controller("controlPiedraPapelTijeraDos", function($scope) {
+miApp.controller("controlPiedraPapelTijeraDos", function($scope, $auth) {
+	if ($auth.isAuthenticated())
+		$state.go("inicio");
+	
 	comenzar();
 
 	$scope.ganadas = "0";

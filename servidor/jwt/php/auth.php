@@ -10,7 +10,7 @@ if ($user->correo =='usuario' && $user->clave == 'clave')
 	$toke["usuario"] = "unUsuario";
 	$token["perfil"] = "admin";
 	$token["iat"] = time();
-	$token["exp"] = time()+20;
+	$token["exp"] = time()+30000;
 
 	$jwt = JWT::encode($token, $ClaveDeEncriptacion);
 }
