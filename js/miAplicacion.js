@@ -2,7 +2,7 @@ var miApp = angular.module('angularABM', ['ui.router', 'angularFileUpload','sate
 
 miApp.config(function($stateProvider, $urlRouterProvider, $authProvider){
 	//proveedor de autentificacion.
-	$authProvider.loginUrl = 'ABM_AngularJs_PHP_persona/servidor/jwt/php/auth.php';
+	$authProvider.loginUrl = 'http://localhost:8080/wsABM_AngularJs_PHP_persona/jwt/php/auth.php';
 	$authProvider.tokenName = 'MiTokenGeneradoEnPHP';
 	$authProvider.tokenPrefix = 'Aplicacion';
 	$authProvider.authReader = 'data';
@@ -206,6 +206,10 @@ miApp.config(function($stateProvider, $urlRouterProvider, $authProvider){
 });
 
 miApp.controller("controlInicio", function($scope, $auth) {
+	$scope.usuario = {};
+	$scope.usuario.correo = "";
+	$scope.usuario.clave = "";
+
 	if ($auth.isAuthenticated())
 	{
 		console.info("token", $auth.getPayload());
@@ -218,12 +222,27 @@ miApp.controller("controlInicio", function($scope, $auth) {
 	}
 
 	$scope.Registrarse = function(){
-		controle.log("guarda la cuenta");
+		$http.post('http://localhost:8080/wsABM_AngularJs_PHP_persona/usuario/' + JSON.stringify($scope.usuario))
+	 	.then(function(respuesta) {   
+	 	  	$auth.login($scope.usuario)
+			.then(function(response){
+				//solo sabemos que nos devolvio un token correcto con el isauthenticated
+				if ($auth.isAuthenticated())
+					$state.go("inicio");
+				else
+					console.info("no token", $auth.getPayload());		
+				
+			}).catch(function(response){
+				console.info("No volvio bien", response);
+			});
+	    },function errorCallback(response) {
+	 		console.log(response);
+	 	 });
 	};
 });
 
 miApp.controller("controlPersonaMenu", function($scope, $state, $auth) {
-	if ($auth.isAuthenticated())
+	if (!$auth.isAuthenticated())
 		$state.go("inicio");
 	$scope.irAAlta = function(){
 		$state.go("persona.alta");
@@ -236,7 +255,6 @@ miApp.controller("controlPersonaMenu", function($scope, $state, $auth) {
 miApp.controller("controlPersonaAlta", function($scope, $http, $state, FileUploader, $auth) {
   $scope.DatoTest="**alta**";
   //inicio las variables
-  var uploader = $scope.uploader=new FileUploader({url:'servidor/imagenes/nexoPersona.php'});
   $scope.persona={};
   $scope.persona.nombre= "" ;
   $scope.persona.dni= "" ;
@@ -244,76 +262,25 @@ miApp.controller("controlPersonaAlta", function($scope, $http, $state, FileUploa
   $scope.persona.foto="pordefecto.png";
 
   $scope.Guardar=function(){
-	console.log($scope.uploader.queue);
-	if($scope.uploader.queue[0]!=undefined)
-	{
-		var nombreFoto = $scope.uploader.queue[0]._file.name;
-		$scope.persona.foto=nombreFoto;
-	}
-	$scope.uploader.uploadAll();
-  	console.log("persona a guardar:");
-    console.log($scope.persona);
+  	$http.post('http://localhost:8080/wsABM_AngularJs_PHP_persona/persona/' + JSON.stringify($scope.persona))
+ 	.then(function(respuesta) {     	
+  	    $state.go("persona.grilla");
+    },function errorCallback(response) {
+ 		console.log(response);
+ 	 });
   }
-  /*var uploader = $scope.uploader = new FileUploader({
-            url: 'servidor/archivos.php'
-        });*/
-  
-  uploader.filters.push({
-      name: 'customFilter',
-      fn: function(item /*{File|FileLikeObject}*/, options) {
-          return this.queue.length < 10;
-      }
-  });
-
-  // CALLBACKS
-
-  uploader.onWhenAddingFileFailed = function(item /*{File|FileLikeObject}*/, filter, options) {
-      console.info('onWhenAddingFileFailed', item, filter, options);
-  };
-  uploader.onAfterAddingFile = function(fileItem) {
-      console.info('onAfterAddingFile', fileItem);
-  };
-  uploader.onAfterAddingAll = function(addedFileItems) {
-      console.info('onAfterAddingAll', addedFileItems);
-  };
-  uploader.onBeforeUploadItem = function(item) {
-      console.info('onBeforeUploadItem', item);
-  };
-  uploader.onProgressItem = function(fileItem, progress) {
-      console.info('onProgressItem', fileItem, progress);
-  };
-  uploader.onProgressAll = function(progress) {
-      console.info('onProgressAll', progress);
-  };
-  uploader.onSuccessItem = function(fileItem, response, status, headers) {
-      console.info('onSuccessItem', fileItem, response, status, headers);
-  };
-  uploader.onErrorItem = function(fileItem, response, status, headers) {
-      console.info('onErrorItem', fileItem, response, status, headers);
-  };
-  uploader.onCancelItem = function(fileItem, response, status, headers) {
-      console.info('onCancelItem', fileItem, response, status, headers);
-  };
-  uploader.onCompleteItem = function(fileItem, response, status, headers) {
-      console.info('onCompleteItem', fileItem, response, status, headers);
-  };
-  uploader.onCompleteAll = function() {
-      console.info('onCompleteAll');
-  };
 });
 
 miApp.controller("controlPersonaGrilla", function($scope, $http, $state, $auth) {
 	$scope.DatoTest="**grilla**";
  	
- 	$http.get('servidor/nexoPersona.php', { params: {accion :"traer"}})
+ 	$http.get('http://localhost:8080/wsABM_AngularJs_PHP_persona/personas')
  	.then(function(respuesta) {     	
-
-      	 $scope.ListadoPersonas = respuesta.data.listado;
-      	 console.log(respuesta.data);
-
+      	 $scope.ListadoPersonas = respuesta.data;
+      	 console.log(respuesta);
     },function errorCallback(response) {
      		 $scope.ListadoPersonas= [];
-     		console.log( response);
+     		console.log(response);
 
  	 });
 	/*$scope.Modificar=function(persona)
@@ -324,25 +291,12 @@ miApp.controller("controlPersonaGrilla", function($scope, $http, $state, $auth) 
  	$scope.Borrar=function(persona){
 		console.log("borrar"+persona);
 
-		$http.post("servidor/nexoPersona.php",{datos:{accion :"borrar",persona:persona}},{headers: {'Content-Type': 'application/x-www-form-urlencoded'}})
-		 .then(function(respuesta) {       
-		         //aca se ejetuca si retorno sin errores        
-		         console.log(respuesta.data);
-				 $http.get('servidor/nexoPersona.php', { params: {accion :"traer"}})
-				.then(function(respuesta) {     	
-
-					 $scope.ListadoPersonas = respuesta.data.listado;
-					 console.log(respuesta.data);
-
-				},function errorCallback(response) {
-						 $scope.ListadoPersonas= [];
-						console.log( response);
-				 });
-
-		    },function errorCallback(response) {        
-		        //aca se ejecuta cuando hay errores
-		        console.log( response);           
-		    });
+		$http.delete('http://localhost:8080/wsABM_AngularJs_PHP_persona/persona/' + persona.id)
+	 	.then(function(respuesta) {     	
+	  	    $state.go("persona.grilla");
+	    },function errorCallback(response) {
+	 		console.log(response);
+	 	 });
  	}
 
  	$scope.Modificar=function(persona){
@@ -356,18 +310,6 @@ miApp.controller("controlPersonaGrilla", function($scope, $http, $state, $auth) 
 				//aca se ejecuta cuando hay errores
 				console.log( response);     			
 		  });
- 		/*console.log("Modificar"+id);
-		$http.post("servidor/nexoPersona.php", {datos:{accion:"buscar", id:id}})
-		.then(function(respuesta)
-		{
-			var persona=respuesta.data;
-			$state.go("alta");//location.href="formAlta.html";
-			$scope.DatoTest=persona.nombre;
-			console.log(persona);
-		} ,function errorCallback(response) {        
-			//aca se ejecuta cuando hay errores
-			console.log(response);           
-		});*/
  	}
 });
 
@@ -402,7 +344,7 @@ miApp.controller("controlLogin", function($scope, $state, $auth) {
 });
 
 miApp.controller("controlRegistro", function($scope, $auth) {
-	if ($auth.isAuthenticated())
+	if (!$auth.isAuthenticated())
 		$state.go("inicio");
 	
 	$scope.Guardar = function(){

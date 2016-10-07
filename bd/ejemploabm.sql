@@ -66,6 +66,13 @@ CREATE TABLE IF NOT EXISTS `persona` (
   `foto` varchar(50) COLLATE utf8_spanish2_ci NOT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
 
+CREATE TABLE IF NOT EXISTS `usuario` (
+  `id` int(11) NOT NULL,
+  `nombre` varchar(50) COLLATE utf8_spanish2_ci NOT NULL,
+  `correo` varchar(50) COLLATE utf8_spanish2_ci NOT NULL,
+  `clave` varchar(50) COLLATE utf8_spanish2_ci NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
+
 --
 -- Volcado de datos para la tabla `persona`
 --
@@ -79,6 +86,9 @@ INSERT INTO `persona` (`id`, `nombre`, `apellido`, `dni`, `foto`) VALUES
 (9, 'Jaime', 'Marrón', '555555', '555555.jpg'),
 (10, 'Esteban', 'Trabajos', '111111', '111111.jpg'),
 (12, 'Miguel', 'Zorro', '444444', '444444.jpg');
+
+INSERT INTO `usuario` (`id`, `nombre`, `correo`, `clave`) VALUES
+(1, 'Mirotta Matias', 'mmirotta@mail.com', '1234')
 
 --
 -- Índices para tablas volcadas
